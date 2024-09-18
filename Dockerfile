@@ -26,8 +26,8 @@ COPY . .
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Ensure the app can bind to the outside world on port 8000
-EXPOSE 8000
+# Ensure the app can bind to the outside world on port 5000
+EXPOSE 5000
 
 # Set the entrypoint to run the migrations and start the server
 ENTRYPOINT ["/entrypoint.sh"]
