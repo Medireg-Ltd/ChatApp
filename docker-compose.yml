@@ -12,7 +12,7 @@ services:
       - POSTGRES_USER=ChatApp_user
       - POSTGRES_PASSWORD=ChatApp_password
       - POSTGRES_HOST=postgres2
-      - POSTGRES_PORT=5432
+      - POSTGRES_PORT=6432
     command: ["gunicorn", "--bind", "0.0.0.0:5000", "ChatApp.wsgi:application"]
 
   postgres2:
@@ -23,7 +23,7 @@ services:
       POSTGRES_USER: ChatApp_user
       POSTGRES_PASSWORD: ChatApp_password
     ports:
-      - "5432:5432"
+      - "6432:6432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

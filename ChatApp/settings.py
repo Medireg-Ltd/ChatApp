@@ -111,8 +111,8 @@ DATABASES = {
         ),  # Database password
         "HOST": os.getenv("POSTGRES_HOST", "postgres2"),  # Database host
         "PORT": os.getenv(
-            "POSTGRES_PORT", "5432"
-        ),  # Database port, default for PostgreSQL is 5432,
+            "POSTGRES_PORT", "6432"
+        ),  # Database port, default for PostgreSQL is 6432,
     }
 }
 # Password validation
