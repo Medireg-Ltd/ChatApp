@@ -1,9 +1,10 @@
-from apps.accounts.models import User
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
+
+from apps.accounts.models import User
 
 
 class UserNameSerializer(serializers.ModelSerializer):
@@ -65,6 +66,7 @@ class LoginUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
+            "id",
             "email",
             "password",
             "full_name",
@@ -85,6 +87,7 @@ class LoginUserSerializer(serializers.ModelSerializer):
         token = user.tokens()
 
         return {
+            "id": user.id,
             "email": user.email,
             "full_name": user.full_name,
             "access_token": str(token.get("access")),
