@@ -69,7 +69,8 @@ class LoginUserSerializer(serializers.ModelSerializer):
             "id",
             "email",
             "password",
-            "full_name",
+            "first_name",
+            "last_name",
             "access_token",
             "refresh_token",
         ]
@@ -89,7 +90,8 @@ class LoginUserSerializer(serializers.ModelSerializer):
         return {
             "id": user.id,
             "email": user.email,
-            "full_name": user.full_name,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
             "access_token": str(token.get("access")),
             "refresh_token": str(token.get("refresh")),
         }
