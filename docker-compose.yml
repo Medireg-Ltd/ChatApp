@@ -23,7 +23,7 @@ services:
       POSTGRES_USER: ChatApp_user
       POSTGRES_PASSWORD: ChatApp_password
     ports:
-      - "6432:6432"
+      - "6432:5432"   # Mapping host port 6432 to container port 5432
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
