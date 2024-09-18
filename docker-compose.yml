@@ -1,0 +1,39 @@
+services:
+  web2:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres2
+    environment:
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - POSTGRES_DB=ChatApp_db
+      - POSTGRES_USER=ChatApp_user
+      - POSTGRES_PASSWORD=ChatApp_password
+      - POSTGRES_HOST=postgres2
+      - POSTGRES_PORT=5432
+    command: ["gunicorn", "--bind", "0.0.0.0:8000", "ChatApp.wsgi:application"]
+
+  postgres2:
+    image: postgres:latest
+    container_name: postgres2
+    environment:
+      POSTGRES_DB: ChatApp_db
+      POSTGRES_USER: ChatApp_user
+      POSTGRES_PASSWORD: ChatApp_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ChatApp_user -d ChatApp_db"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+
+volumes:
+  postgres_data:
